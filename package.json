@@ -5,6 +5,9 @@
   "repository": "https://github.com/ilyakuchin/podcast-api.git",
   "author": "ilyakuchin <19621723+ilyakuchin@users.noreply.github.com>",
   "license": "MIT",
+  "jest": {
+    "verbose": true
+  },
   "dependencies": {
     "axios": "^0.19.0",
     "cors": "^2.8.5",
@@ -15,7 +18,8 @@
   },
   "type": "module",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "node src/index.js",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
