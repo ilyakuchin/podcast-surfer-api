@@ -9,7 +9,9 @@ const app = express();
 
 app.use(cors());
 
-app.listen(PORT, () => console.log(`podcast-api is running on port ${PORT}`));
+app.listen(process.env.PORT || PORT, () =>
+  console.log(`podcast-api is running`)
+);
 
 app.get("/podcasts", (req, res) => {
   getPodcasts(req.query.name).then(podcasts => res.send(podcasts));
