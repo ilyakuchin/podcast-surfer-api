@@ -18,13 +18,16 @@ export function getPodcast(url) {
 }
 
 function getEpisodes(item) {
-  console.log(item);
   return item.map(i => {
     return {
       id: i.guid[0]["_"],
       name: i.title[0],
       description: i.description[0],
-      image: i["itunes:image"][0]["$"]["href"]
+      image: i["itunes:image"][0]["$"]["href"],
+      audio: {
+        type: i.enclosure[0]["$"].type,
+        url: i.enclosure[0]["$"].url
+      }
     };
   });
 }
