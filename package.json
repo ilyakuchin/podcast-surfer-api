@@ -17,7 +17,6 @@
     "jsdom": "^15.2.1",
     "xml2js": "^0.4.23"
   },
-  "type": "module",
   "scripts": {
     "build": "yarn clean && yarn build-babel",
     "start": "yarn build && node ./build/index.js",
