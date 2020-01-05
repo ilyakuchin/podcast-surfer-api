@@ -1,14 +1,14 @@
 language: node_js
 node_js:
-- stable
+  - stable
 cache:
   directories:
-  - node_modules
+    - node_modules
 branches:
   only:
-  - master
+    - master
 deploy:
   provider: heroku
   api_key:
     secure: KBMBRzjSAHrZuynWNQuZHjetVeBU6fb5W1LaIwEI0YyOvwh0QsY1gKR+z8Vxe4VrQGv0HlYMPhWuWYVUHeMT0Xrln36HOeoTT5DH9q6gYz/8S67ztdlpY1mhP8NIDCd3Pd74s+ltPNT1r99onAp598BVMacju31XcrKOwdYdtX+JcJ/7aMCNBKEMwJCKHFyBxTEW0pPBcFgrP8MBRSrVz2fySHHTMl3paIcH07vQxBWMui1+miYIHh3Ic3aGhKexzGU6WIJ/neXwj7CWyOXSkWkHi5YFOnKEdV/r8zkBViOzwZstSWVcl8CNcQGzFwOXyZ4MftvhFyY4Xq/R+uY2h0uEJNiLqtB3G8UUoVDFQ1gEeeJmlwwbRBd84eHOzW7jJR7ZAdSA+AYO7nqP9iogaG63NJugE34LDrFhaeeCpaqEqlo244tRBcMycj3p5tSER5PvEj0X88ud24jXUh7qluTrVBchhQ0/GT4Tg5QdiGg6q/2GWol2iHDzoKdb/Y72RaMYTsSKtthQYO73KaiNq6k5EHtE01wpRwDaJ8Wax+Mc7F+1yjDx89YtaNhlpWoKTLy0l7dxtbopjUX9Q3pejJibAfimv7U8c5h3sSKVmRQsZb4G5y4rMLNZQ5llPQ7tA4sknl3OWSN/TJ6Ac7cw+ZUI8qawVYoigWhGwGEzkAY=
-  app: podcast-api
+  app: podcast-player-api
