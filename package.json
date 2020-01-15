@@ -10,21 +10,24 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "bcrypt": "^3.0.7",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jest": "^24.9.0",
     "jsdom": "^15.2.1",
+    "mongoose": "^5.8.7",
     "xml2js": "^0.4.23"
   },
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
-    "test": "jest"
+    "build": "yarn clean && yarn build-babel",
+    "start": "yarn build && node ./build/index.js",
+    "test": "jest",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.7",
-    "@babel/node": "^7.7.7",
-    "@babel/preset-env": "^7.7.7",
+    "babel-cli": "^6.26.0",
     "nodemon": "^2.0.2"
   }
 }
