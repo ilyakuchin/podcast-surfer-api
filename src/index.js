@@ -40,9 +40,9 @@ app.post("/register", (req, res) => {
       });
       user.save(err => {
         if (err) {
-          res.status(400).send();
+          res.sendStatus(400);
         } else {
-          res.status(200).send();
+          res.sendStatus(200);
         }
       });
     })
@@ -53,9 +53,9 @@ app.post("/login", (req, res) => {
   User.findOne({ username: req.body.username }, (err, obj) => {
     bcrypt.compare(req.body.password, obj.password, (err, r) => {
       if (r === true) {
-        res.status(200).send();
+        res.sendStatus(200);
       } else {
-        res.status(401).send();
+        res.sendStatus(401);
       }
     });
   });
