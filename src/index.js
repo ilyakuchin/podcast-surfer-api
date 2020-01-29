@@ -61,22 +61,43 @@ app.get('/episode', verifyToken, (req, res) => {
 
 app.post('/register', (req, res) => {
   const saltRounds = 10;
-
-  bcrypt.genSalt(saltRounds, (err, salt) =>
-    bcrypt.hash(req.body.password, salt, (err, hash) => {
-      const user = new User({
-        username: req.body.username,
-        password: hash
-      });
-      user.save(err => {
-        if (err) {
-          res.sendStatus(400);
-        } else {
-          res.sendStatus(200);
-        }
-      });
-    })
-  );
+  if (!req.body.username) {
+    res.status(401).send('Username field is required');
+  } else if (!req.body.username.match('^[a-zA-Z0-9_.-]*$')) {
+    res.status(401).send('Username must contain only letters and numbers');
+  } else if (req.body.username.length < 3) {
+    res.status(401).send('Username must be at least 3 characters long');
+  } else if (!req.body.password) {
+    res.status(401).send('Password field is required');
+  } else if (req.body.password.length < 3) {
+    res.status(401).send('Password must be at least 3 characters long');
+  } else if (!req.body.confirmPassword) {
+    res.status(401).send('Confirm password field is required');
+  } else if (req.body.password !== req.body.confirmPassword) {
+    res.status(401).send('Password and confirm password does not match');
+  } else {
+    User.findOne({ username: req.body.username }, (err, obj) => {
+      if (!obj) {
+        bcrypt.genSalt(saltRounds, (err, salt) =>
+          bcrypt.hash(req.body.password, salt, (err, hash) => {
+            const user = new User({
+              username: req.body.username,
+              password: hash
+            });
+            user.save(err => {
+              if (err) {
+                res.status(500).send('Could not save user in database');
+              } else {
+                res.sendStatus(200);
+              }
+            });
+          })
+        );
+      } else {
+        res.status(401).send('Username already exists');
+      }
+    });
+  }
 });
 
 function verifyToken(req, res, next) {
