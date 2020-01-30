@@ -115,7 +115,11 @@ function verifyToken(req, res, next) {
 }
 
 app.post('/login', (req, res) => {
-  if (req.body.username && req.body.password) {
+  if (!req.body.username) {
+    res.status(401).send('Username field is required');
+  } else if (!req.body.password) {
+    res.status(401).send('Password field is required');
+  } else {
     User.findOne({ username: req.body.username }, (err, obj) => {
       if (obj) {
         bcrypt.compare(req.body.password, obj.password, (err, r) => {
@@ -124,15 +128,12 @@ app.post('/login', (req, res) => {
               res.json({ token });
             });
           } else {
-            console.log(err);
-            res.sendStatus(401);
+            res.status(401).sendStatus('Invalid password');
           }
         });
       } else {
-        res.sendStatus(401);
+        res.status(401).send('There is no user with such username');
       }
     });
-  } else {
-    res.sendStatus(401);
   }
 });
