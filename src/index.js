@@ -1,12 +1,12 @@
-import express from 'express';
-import cors from 'cors';
-import { getPodcasts } from './getPodcasts.js';
-import { getPodcast, getEpisode } from './getPodcast.js';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import User from './models/user.js';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+const express = require('express');
+const cors = require('cors');
+const getPodcasts = require('./getPodcasts.js');
+const { getPodcast, getEpisode } = require('./getPodcast.js');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const User = require('./models/user.js');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const jwtKey =
   'WU3Kknc9RAngPjwMhNJhwpCAF1U6EEr9AvllKLqQI3ZeuZmMWgoZ4vdAriODwmo';

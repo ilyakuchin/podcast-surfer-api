@@ -1,7 +1,7 @@
-import axios from 'axios';
-import xml2js from 'xml2js';
+const axios = require('axios');
+const xml2js = require('xml2js');
 
-export function getPodcast(url) {
+function getPodcast(url) {
   return axios
     .get(url)
     .then(res => {
@@ -32,7 +32,7 @@ function getEpisodes(item) {
   });
 }
 
-export function getEpisode(url, episodeId) {
+function getEpisode(url, episodeId) {
   return getPodcast(url).then(res => {
     for (let i = 0; i < res.episodes.length; i++) {
       if (res.episodes[i].id === episodeId) {
@@ -41,3 +41,5 @@ export function getEpisode(url, episodeId) {
     }
   });
 }
+
+module.exports = { getPodcast, getEpisode };
