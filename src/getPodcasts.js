@@ -1,8 +1,8 @@
-import axios from "axios";
+const axios = require('axios');
 
-const API_URL = "https://itunes.apple.com/search?media=podcast&term=";
+const API_URL = 'https://itunes.apple.com/search?media=podcast&term=';
 
-export function getPodcasts(podcastName) {
+function getPodcasts(podcastName) {
   return axios
     .get(`${API_URL}${encodeURIComponent(podcastName)}`)
     .then(function(response) {
@@ -18,3 +18,5 @@ export function getPodcasts(podcastName) {
       return podcastsInfo;
     });
 }
+
+module.exports = getPodcasts;

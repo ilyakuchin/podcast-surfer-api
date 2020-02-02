@@ -20,16 +20,12 @@
     "mongoose": "^5.8.7",
     "xml2js": "^0.4.23"
   },
-  "type": "module",
   "scripts": {
-    "build": "yarn clean && yarn build-babel",
-    "start": "yarn build && node ./build/index.js",
-    "test": "jest",
-    "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build ./src -s"
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js",
+    "test": "jest"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "nodemon": "^2.0.2"
   }
 }
