@@ -128,7 +128,7 @@ app.post('/login', (req, res) => {
               res.json({ token });
             });
           } else {
-            res.status(401).sendStatus('Invalid password');
+            res.status(401).send('Invalid password');
           }
         });
       } else {
