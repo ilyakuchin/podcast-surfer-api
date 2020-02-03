@@ -22,7 +22,9 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.listen(PORT, () => console.log(`podcast-api is running on port ${PORT}`));
+app.listen(process.env.PORT || PORT, () =>
+  console.log(`podcast-api is running`)
+);
 
 app.get('/podcasts', verifyToken, (req, res) => {
   jwt.verify(req.token, jwtKey, (err, authData) => {
