@@ -1,15 +1,15 @@
-import axios from "axios";
+const axios = require('axios');
 
-const API_URL = "https://itunes.apple.com/search?media=podcast&term=";
+const API_URL = 'https://itunes.apple.com/search?media=podcast&term=';
 
-export function getPodcasts(podcastName) {
+function getPodcasts(podcastName) {
   return axios
     .get(`${API_URL}${encodeURIComponent(podcastName)}`)
     .then(function(response) {
       let podcastsInfo = [];
       for (let i = 0; i < response.data.results.length; i++) {
         podcastsInfo.push({
-          id: response.data.results[i].collectionId,
+          id: response.data.results[i].collectionId.toString(),
           name: response.data.results[i].collectionName,
           image: response.data.results[i].artworkUrl600,
           rss: response.data.results[i].feedUrl
@@ -18,3 +18,5 @@ export function getPodcasts(podcastName) {
       return podcastsInfo;
     });
 }
+
+module.exports = getPodcasts;
