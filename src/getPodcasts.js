@@ -9,7 +9,7 @@ function getPodcasts(podcastName) {
       let podcastsInfo = [];
       for (let i = 0; i < response.data.results.length; i++) {
         podcastsInfo.push({
-          id: response.data.results[i].collectionId,
+          id: response.data.results[i].collectionId.toString(),
           name: response.data.results[i].collectionName,
           image: response.data.results[i].artworkUrl600,
           rss: response.data.results[i].feedUrl
