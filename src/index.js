@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const getPodcasts = require('./getPodcasts.js');
@@ -8,10 +9,9 @@ const User = require('./models/user.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const jwtKey =
-  'WU3Kknc9RAngPjwMhNJhwpCAF1U6EEr9AvllKLqQI3ZeuZmMWgoZ4vdAriODwmo';
+const jwtKey = process.env.JWT_KEY;
 const PORT = 5000;
-mongoose.connect('mongodb://localhost:27017/podcast-player');
+mongoose.connect(process.env.CONNECTION_STRING);
 let db = mongoose.connection;
 db.on('error', err => console.log(err));
 db.once('open', () => console.log('connected to db'));
