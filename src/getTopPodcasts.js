@@ -9,7 +9,7 @@ function getTopPodcasts() {
     let podcastsInfo = [];
     for (let i = 0; i < res.length; i++) {
       podcastsInfo.push({
-        id: res[i].collectionId.toString(),
+        id: res[i].id.toString(),
         name: res[i].name,
         image: res[i].artworkUrl100,
         rss: res[i].url
