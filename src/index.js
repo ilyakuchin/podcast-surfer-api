@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const getPodcasts = require('./getPodcasts.js');
 const { getPodcast, getEpisode } = require('./getPodcast.js');
+const getTopPodcasts = require('./getTopPodcasts');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const User = require('./models/user.js');
@@ -137,4 +138,8 @@ app.post('/login', (req, res) => {
       }
     });
   }
+});
+
+app.get('/popular', (req, res) => {
+  getTopPodcasts().then(topPodcasts => res.send(topPodcasts));
 });
