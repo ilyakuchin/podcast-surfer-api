@@ -27,7 +27,8 @@ function getEpisodes(item) {
       name: i.title[0],
       description: i.description[0].toString().replace(/(<([^>]+)>)/gi, ''),
       imageUrl: i['itunes:image'][0]['$']['href'],
-      audioUrl: i.enclosure[0]['$'].url
+      audioUrl: i.enclosure[0]['$'].url,
+      pubDate: i.pubDate[0]
     };
   });
 }
