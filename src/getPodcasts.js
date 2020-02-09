@@ -11,7 +11,7 @@ function getPodcasts(podcastName) {
         podcastsInfo.push({
           id: response.data.results[i].collectionId.toString(),
           name: response.data.results[i].collectionName,
-          image: response.data.results[i].artworkUrl600,
+          imageUrl: response.data.results[i].artworkUrl600,
           rss: response.data.results[i].feedUrl
         });
       }

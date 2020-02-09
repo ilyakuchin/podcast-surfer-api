@@ -14,13 +14,13 @@ function getPodcast(url) {
           .toString()
           .replace(/(<([^>]+)>)/gi, ''),
         imageUrl: result.rss.channel[0].image[0].url[0],
-        episodes: getEpisodes(result.rss.channel[0].item),
+        episodes: getEpisodes(result.rss.channel[0].item, url),
         rss: url
       };
     });
 }
 
-function getEpisodes(item) {
+function getEpisodes(item, url) {
   return item.map(i => {
     return {
       id: i.guid[0]['_'],
@@ -28,7 +28,8 @@ function getEpisodes(item) {
       description: i.description[0].toString().replace(/(<([^>]+)>)/gi, ''),
       imageUrl: i['itunes:image'][0]['$']['href'],
       audioUrl: i.enclosure[0]['$'].url,
-      pubDate: i.pubDate[0]
+      date: i.pubDate[0],
+      podcastUrl: url
     };
   });
 }

@@ -16,7 +16,7 @@ function getTopPodcasts() {
         podcastsInfo.push({
           id: res[i].id.toString(),
           name: res[i].name,
-          image: res[i].artworkUrl100,
+          imageUrl: res[i].artworkUrl100,
           rss: null
         });
         promises.push(getFeedUrl(res[i].url));
