@@ -106,6 +106,9 @@ app.post('/register', (req, res) => {
 function verifyToken(req, res, next) {
   const bearerHeader = req.headers['authorization'];
 
+  console.log('verifyToken');
+  console.log(bearerHeader);
+
   if (typeof bearerHeader !== undefined) {
     const bearer = bearerHeader.split(' ');
     const bearerToken = bearer[1];
@@ -142,4 +145,60 @@ app.post('/login', (req, res) => {
 
 app.get('/popular', (req, res) => {
   getTopPodcasts().then(topPodcasts => res.send(topPodcasts));
+});
+
+app.get('/subscriptions', verifyToken, (req, res) => {
+  jwt.verify(req.token, jwtKey, (err, authData) => {
+    User.findOne({ username: req.query.username }, (err, obj) => {
+      if (obj) {
+        res.status(200).send(obj.subscriptions);
+      } else {
+        res.status(401).send('There is no user with such username');
+      }
+    });
+  });
+});
+
+app.post('/addSubscription', (req, res) => {
+  User.findOne({ username: req.body.username }, (err, obj) => {
+    if (obj) {
+      User.update(
+        { username: req.body.username },
+        {
+          $set: { subscriptions: [...obj.subscriptions, req.body.podcastUrl] }
+        }
+      )
+        .exec()
+        .then(result => {
+          res.status(200).send(result.subscriptions);
+        });
+    } else {
+      res.status(401).send('There is no user with such username');
+    }
+  });
+});
+
+app.post('/deleteSubscription', (req, res) => {
+  User.findOne({ username: req.body.username }, (err, obj) => {
+    if (obj) {
+      const index = obj.subscriptions.indexOf(req.body.podcastUrl);
+      if (index !== -1) {
+        User.update(
+          { username: req.body.username },
+          {
+            $set: {
+              subscriptions: [
+                ...obj.subscriptions.slice(0, index),
+                ...obj.subscriptions.slice(index + 1)
+              ]
+            }
+          }
+        )
+          .exec()
+          .then(result => res.status(200).send(result.subscriptions));
+      }
+    } else {
+      res.status(401).send('There is no user with such username');
+    }
+  });
 });
