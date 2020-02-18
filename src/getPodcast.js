@@ -17,7 +17,8 @@ function getPodcast(url) {
         episodes: getEpisodes(result.rss.channel[0].item, url),
         rss: url
       };
-    });
+    })
+    .catch(err => console.log(err.message));
 }
 
 function getEpisodes(item, url) {
