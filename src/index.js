@@ -106,6 +106,9 @@ app.post('/register', (req, res) => {
 function verifyToken(req, res, next) {
   const bearerHeader = req.headers['authorization'];
 
+  console.log('verifyToken');
+  console.log(bearerHeader);
+
   if (typeof bearerHeader !== undefined) {
     const bearer = bearerHeader.split(' ');
     const bearerToken = bearer[1];
@@ -148,7 +151,6 @@ app.get('/subscriptions', verifyToken, (req, res) => {
   jwt.verify(req.token, jwtKey, (err, authData) => {
     User.findOne({ username: req.query.username }, (err, obj) => {
       if (obj) {
-        console.log(obj.subscriptions);
         res.status(200).send(obj.subscriptions);
       } else {
         res.status(401).send('There is no user with such username');
