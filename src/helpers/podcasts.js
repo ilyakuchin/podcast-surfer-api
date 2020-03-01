@@ -26,6 +26,9 @@ function getPodcast(url) {
         ),
         rss: url
       };
+    })
+    .catch(() => {
+      throw new Error('Server error');
     });
 }
 
@@ -66,6 +69,9 @@ function getPodcasts(podcastName) {
         });
       }
       return podcastsInfo;
+    })
+    .catch(() => {
+      throw new Error('Server error');
     });
 }
 
@@ -92,17 +98,25 @@ function getTopPodcasts() {
         podcastsInfo[i].rss = res[i];
       }
       return podcastsInfo;
+    })
+    .catch(() => {
+      throw new Error('Server error');
     });
 }
 
 function getFeedUrl(url) {
-  return axios.get(url).then(res => {
-    const dom = new JSDOM(res.data);
-    let t = JSON.parse(
-      dom.window.document.getElementById('shoebox-ember-data-store').text
-    );
-    return t.data.attributes.feedUrl;
-  });
+  return axios
+    .get(url)
+    .then(res => {
+      const dom = new JSDOM(res.data);
+      let t = JSON.parse(
+        dom.window.document.getElementById('shoebox-ember-data-store').text
+      );
+      return t.data.attributes.feedUrl;
+    })
+    .catch(() => {
+      throw new Error('Server error');
+    });
 }
 
 module.exports = { getPodcast, getPodcasts, getTopPodcasts };
