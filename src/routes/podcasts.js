@@ -20,7 +20,7 @@ podcasts.get('/', (req, res) => {
     res.status(400).json({ message: 'You can pass only one parameter' });
   } else if (req.query.term) {
     getPodcasts(req.query.term)
-      .then(podcasts => res.status(200).json(podcasts))
+      .then(p => res.status(200).json(p))
       .catch(error => {
         if (error.message === 'Server error') {
           res.status(500).json({ message: 'Server error' });
