@@ -1,10 +1,10 @@
 const express = require('express');
-const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const jwtKey = process.env.JWT_KEY;
 const { check, validationResult } = require('express-validator');
+const User = require('../models/user');
 
+const jwtKey = process.env.JWT_KEY;
 const auth = express.Router();
 
 auth.post(
@@ -77,7 +77,7 @@ auth.post(
             });
           }
         })
-        .catch(error => {
+        .catch(() => {
           res.status(401).json({
             message: 'Authentication error: Invalid username or password'
           });
