@@ -19,19 +19,32 @@ function getPodcast(url) {
           .toString()
           .replace(/(<([^>]+)>)/gi, ''),
         imageUrl: result.rss.channel[0].image[0].url[0],
-        episodes: getEpisodes(result.rss.channel[0].item, url),
+        episodes: getEpisodes(
+          result.rss.channel[0].item,
+          url,
+          result.rss.channel[0].image[0].url[0]
+        ),
         rss: url
       };
     });
 }
 
-function getEpisodes(item, url) {
+function getEpisodes(item, url, podcastImageUrl) {
+  item = item.filter(i => i.enclosure !== undefined);
+
   return item.map(i => {
+    let episodeUrl;
+    if (i['itunes:image'] !== undefined) {
+      episodeUrl = i['itunes:image'][0]['$']['href'];
+    } else {
+      episodeUrl = podcastImageUrl;
+    }
+
     return {
       id: i.guid[0]['_'],
       name: i.title[0],
       description: i.description[0].toString().replace(/(<([^>]+)>)/gi, ''),
-      imageUrl: i['itunes:image'][0]['$']['href'],
+      imageUrl: episodeUrl,
       audioUrl: i.enclosure[0]['$'].url,
       date: i.pubDate[0],
       podcastUrl: url
