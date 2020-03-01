@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const podcasts = require('./routes/podcasts.js');
 const users = require('./routes/users');
 const auth = require('./routes/auth.js');
+const morgan = require('morgan');
 const PORT = 5000;
 
 mongoose.set('useCreateIndex', true);
