@@ -37,7 +37,6 @@ users.patch(
     } else {
       jwt.verify(req.token, jwtKey, (err, authData) => {
         if (err) {
-          console.log(err);
           res.status(401).json({ error: 'Unauthorized' });
         } else {
           User.findOne({ username: authData.username })

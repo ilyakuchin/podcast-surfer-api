@@ -7,9 +7,11 @@ const {
 
 const podcasts = express.Router();
 
-podcasts.get('/popular', (req, res) =>
-  getTopPodcasts().then(topPodcasts => res.status(200).json([...topPodcasts]))
-);
+podcasts.get('/popular', (req, res) => {
+  getTopPodcasts().then(topPodcasts => {
+    res.status(200).json([...topPodcasts]);
+  });
+});
 
 podcasts.get('/', (req, res) => {
   if (req.query.term && req.query.url) {
