@@ -8,11 +8,13 @@ const users = require('./routes/users');
 const auth = require('./routes/auth.js');
 const PORT = 5000;
 
-mongoose.connect(process.env.CONNECTION_STRING);
-let db = mongoose.connection;
+mongoose.set('useCreateIndex', true);
 
-db.on('error', err => console.log(err));
-db.once('open', () => console.log('connected to db'));
+mongoose.connect(process.env.CONNECTION_STRING, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+let db = mongoose.connection;
 
 const app = express();
 
@@ -23,6 +25,4 @@ app.use('/podcasts', podcasts);
 app.use('/auth', auth);
 app.use('/users', users);
 
-app.listen(process.env.PORT || PORT, () =>
-  console.log(`podcast-api is running`)
-);
+app.listen(process.env.PORT || PORT);

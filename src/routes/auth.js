@@ -23,7 +23,7 @@ auth.post(
   (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(401).json({ error: 'Registration error' });
+      res.status(401).json({ message: 'Registration error' });
     } else {
       User.findOne({ username: req.body.username })
         .exec()
@@ -36,7 +36,7 @@ auth.post(
           }).save();
         })
         .then(() => res.status(200).json({ message: 'Registered' }))
-        .catch(() => res.status(400).json({ error: 'Registration error' }));
+        .catch(() => res.status(400).json({ message: 'Registration error' }));
     }
   }
 );
@@ -47,7 +47,9 @@ auth.post(
   (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(401).json({ errors: 'Authentication error' });
+      res.status(401).json({
+        message: 'Authentication error: Invalid username or password'
+      });
     } else {
       User.findOne({ username: req.body.username })
         .exec()
@@ -60,17 +62,26 @@ auth.post(
               { expiresIn: '24h' },
               (err, token) => {
                 if (err) {
-                  res.status(401).json({ error: 'Authentication error' });
+                  res.status(401).json({
+                    message:
+                      'Authentication error: Invalid username or password'
+                  });
                 } else {
                   res.status(200).json({ message: 'Successful login', token });
                 }
               }
             );
           } else {
-            res.status(401).json({ errors: 'Invalid password' });
+            res.status(401).json({
+              message: 'Authentication error: Invalid username or password'
+            });
           }
         })
-        .catch(() => res.status(401).json({ error: 'Authentication error' }));
+        .catch(error => {
+          res.status(401).json({
+            message: 'Authentication error: Invalid username or password'
+          });
+        });
     }
   }
 );

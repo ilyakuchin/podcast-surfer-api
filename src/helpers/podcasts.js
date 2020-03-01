@@ -7,8 +7,6 @@ const URL =
   'https://rss.itunes.apple.com/api/v1/us/podcasts/top-podcasts/all/10/explicit.json';
 
 function getPodcast(url) {
-  console.log('getpodcast');
-  console.log(`url=${url}`);
   return axios
     .get(url)
     .then(res => {
@@ -24,8 +22,7 @@ function getPodcast(url) {
         episodes: getEpisodes(result.rss.channel[0].item, url),
         rss: url
       };
-    })
-    .catch(err => console.log(err.message));
+    });
 }
 
 function getEpisodes(item, url) {
