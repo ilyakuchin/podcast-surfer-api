@@ -5,7 +5,7 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const API_URL = 'https://itunes.apple.com/search?media=podcast&term=';
 const URL =
-  'https://rss.itunes.apple.com/api/v1/us/podcasts/top-podcasts/all/10/explicit.json';
+  'https://rss.itunes.apple.com/api/v1/us/podcasts/top-podcasts/all/20/explicit.json';
 
 function getFeedUrl(url) {
   return axios
@@ -102,7 +102,11 @@ function getTopPodcasts() {
         podcastsInfo.push({
           id: res[i].id.toString(),
           name: res[i].name,
-          imageUrl: res[i].artworkUrl100,
+          imageUrl:
+            res[i].artworkUrl100.substring(
+              0,
+              res[i].artworkUrl100.length - 13
+            ) + '600x600bb.png',
           rss: null
         });
         promises.push(getFeedUrl(res[i].url));
