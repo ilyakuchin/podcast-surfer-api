@@ -27,7 +27,7 @@
     "jest": "^24.9.0",
     "jsdom": "^16.1.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.7",
+    "mongoose": "^5.9.9",
     "morgan": "^1.9.1",
     "xml2js": "^0.4.23"
   },
