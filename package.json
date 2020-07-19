@@ -23,11 +23,11 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-validator": "^6.5.0",
+    "express-validator": "^6.6.0",
     "jest": "^24.9.0",
-    "jsdom": "^16.1.0",
+    "jsdom": "^16.3.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.15",
+    "mongoose": "^5.9.25",
     "morgan": "^1.9.1",
     "xml2js": "^0.4.23"
   },
@@ -38,9 +38,9 @@
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-import": "^2.22.0",
     "nodemon": "^2.0.4"
   }
 }
